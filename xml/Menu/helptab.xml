@@ -5,10 +5,5 @@
     <title>HelpTab Settings</title>
     <page_callback>CRM_Admin_Form_Setting_HelpTab</page_callback>
     <access_arguments>administer CiviCRM</access_arguments>
-  </item>
-  <item>
-    <path>civicrm/helptab/ajax/items</path>
-    <page_callback>CRM_HelpTab_Page_AJAX::getItems</page_callback>
-    <access_arguments>access CiviCRM</access_arguments>
   </item>  
 </menu>

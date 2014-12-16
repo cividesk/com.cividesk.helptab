@@ -1,80 +1,80 @@
 /* CSS Document */
 
 body{
-    overflow-x: hidden;
-    font: 12px "freight-sans-pro",sans-serif !important;
-    letter-spacing: 0.7px;
+  overflow-x: hidden;
+  font: 12px "freight-sans-pro",sans-serif !important;
+  letter-spacing: 0.7px;
 }
 
 #map-legend-control {	
-    height: 100%;
-    margin: 0;	
-    float: right;
-    background-color: #e9e7e7;
-    position: relative;
-    border-bottom-left-radius:10px;
-    border-top-left-radius:10px;
-    border-left: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    margin-right: -1px;
-    top:80px;
+  height: 100%;
+  margin: 0;	
+  float: right;
+  background-color: #e9e7e7;
+  position: relative;
+  border-bottom-left-radius:10px;
+  border-top-left-radius:10px;
+  border-left: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-right: -1px;
+  top:80px;
 
 }
 
 #map-legend {    
-    margin: 0;
-    padding: 12px;
-    float: right;
-    background-color: #f6f6f6;	
-    border-radius: 7px;
-    border: 1px solid #ccc;
-    height: 209px;
+  margin: 0;
+  padding: 12px;
+  float: right;
+  background-color: #f6f6f6;	
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  height: 209px;
 }
 
 #map-legend p {
-    padding-left: 25px;
-    width: 400px;
+  padding-left: 25px;
+  width: 400px;
 }
 
 #toggle-slide-button {
-    width:30px;
-    height:80px;
-    cursor: pointer;
+  width:30px;
+  height:80px;
+  cursor: pointer;
 }
 
 .pointer{
-    border-color: transparent #999 transparent transparent;
-    border-style: solid;
-    border-width: 10px 10px 9px 0;    
-    float: right;
-    height: 0;
-    margin-top: 32px;
+  border-color: transparent #999 transparent transparent;
+  border-style: solid;
+  border-width: 10px 10px 9px 0;    
+  float: right;
+  height: 0;
+  margin-top: 32px;
 }
 
 .title{
-    text-decoration: underline !important;    
+  text-decoration: underline !important;    
 }
 
 .jScrollbar4{
-    background-color: #f6f6f6 !important;
-    border-radius: 7px;
-    width: 473px;
-    padding: 0px;
+  background-color: #f6f6f6 !important;
+  border-radius: 7px;
+  width: 473px;
+  padding: 0px;
 }
 
 .jScrollbar4 .jScrollbar_draggable{
-    background:none repeat scroll 0 0 #e9e7e7 !important;
+  background:none repeat scroll 0 0 #e9e7e7 !important;
 }
 
 .jScrollbar4 .jScrollbar_draggable a.draggable{
-    cursor: pointer !important;
+  cursor: pointer !important;
 }
 
 .jScrollbar_draggable{
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .context{
-    font-size: 10px;   
+  font-size: 10px;   
 }

@@ -27,14 +27,13 @@ function helptab_civicrm_xmlMenu(&$files) {
  *
  * @param $files array(string)
  */
-function helptab_civicrm_navigationMenu(&$params) {
-  _helptab_civix_insert_navigation_menu($params, 'Help', array(
-    'name'       => 'Support Center',
-    'url'        => dirname(CIVICRM_UF_BASEURL) . '/help',
+function helptab_civicrm_navigationMenu( &$params ) {
+  // Add menu entry for extension administration page
+  _helptab_civix_insert_navigation_menu($params, 'Administer/Customize Data and Screens', array(
+    'name'       => 'HelpTab Settings',
+    'url'        => 'civicrm/admin/setting/helptab',
     'permission' => 'administer CiviCRM',
-    'separator'  => 2, // before menu item
   ));
-
 }
 
 /**
@@ -98,6 +97,7 @@ function helptab_civicrm_pageRun(&$page) {
   // var secret=kkkk
   // var version=4.4
   // Display the helptab: include the files in the head and body
+    CRM_Utils_HelpTab::addResource();
 }
 
 /**
@@ -107,4 +107,5 @@ function helptab_civicrm_buildForm(&$form) {
   // Extract the page Menu
   // Check if is_public, return
   // Display the helptab
+    CRM_Utils_HelpTab::addResource();
 }

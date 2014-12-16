@@ -1,23 +1,24 @@
 cj(document).ready(function() {
 
   //getContent Function called
-    setTimeout(function() {
-        getContent();
-    }, 2000)
+  setTimeout(function() {
+    cj('body').append('<div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control"><span class="pointer"></span><div href="javascript:void()" id="toggle-slide-button"></div></div>');
+    getContent();
 
-  var state = false;
-  cj("#toggle-slide-button").click(function() {
 
-    if (!state) {
-      cj('#map-legend').animate({width: "toggle"}, 1000);
-      state = true;
-    }
-    else {
-      cj('#map-legend').animate({width: "toggle"}, 1000);
-      state = false;
-    }
-  });
-
+    var state = false;
+    cj("#toggle-slide-button").live('click', function() {
+      if (!state) {
+        cj('#map-legend').animate({width: "toggle"}, 1000);
+        state = true;
+      }
+      else {
+        cj('#map-legend').animate({width: "toggle"}, 1000);
+        state = false;
+      }
+    })
+  }, 2000)
+  
   //@todo - Implementation of tooltip
   cj('#txtName').tooltip();        
 
@@ -40,31 +41,32 @@ function getContent() {
         container.append(viewData);
 
       });
+    }
 
-      //Implemented listing show-hide using jquery UI
-      cj("#accordion").accordion({
+
+
+  });
+    //Implemented listing show-hide using jquery UI
+    cj("#accordion").accordion({
         event: "click hoverintent",
         heightStyle: "content"
-      });
-        
-      //Js custom scroll bar
-      cj('.jScrollbar4').jScrollbar();
-      
-      //Hide scrollbar for short records - set height as per set in css to 209
-      var contentHeight = cj(".jScrollbar_mask").height();
-      if( contentHeight < 209 ){
+    });
+
+    //Js custom scroll bar
+    cj('.jScrollbar4').jScrollbar();
+
+    //Hide scrollbar for short records - set height as per set in css to 209
+    var contentHeight = cj(".jScrollbar_mask").height();
+    if( contentHeight < 209 ){
         cj('.jScrollbar_draggable').hide();
-      }
-      
-      //Handle click event for head tag in accordion
-      cj(".title").on("click", function() {
+    }
+
+    //Handle click event for head tag in accordion
+    cj(".title").on("click", function() {
         var url = cj(this).attr('href');
         window.open(url, '_blank');
 
-      });
-
-    }
-  });
+    });
 
 }
 	

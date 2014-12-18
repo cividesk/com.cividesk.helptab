@@ -1,75 +1,114 @@
 cj(document).ready(function() {
-
-  //getContent Function called
-  setTimeout(function() {
-    cj('body').append('<div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control"><span class="pointer"></span><div href="javascript:void()" id="toggle-slide-button"></div></div>');
-    getContent();
-
-
-    var state = false;
-    cj("#toggle-slide-button").live('click', function() {
-      if (!state) {
-        cj('#map-legend').animate({width: "toggle"}, 1000);
-        state = true;
-      }
-      else {
-        cj('#map-legend').animate({width: "toggle"}, 1000);
-        state = false;
-      }
-    })
-  }, 2000)
   
-  //@todo - Implementation of tooltip
-  cj('#txtName').tooltip();        
+    setTimeout(function() {
+        //cj('body').append('<div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control"><span class="pointer"></span><div href="javascript:void()" id="toggle-slide-button"></div></div>');
 
-  });
+        var state = false;
+        cj("#toggle-slide-button").live('click', function() {
+            if (!state) {
+                cj('#map-legend').animate({width: 468, padding: 12}, 1000);
 
-//Ajax request to get the data
+                //Get the content on open of panel
+                //Restrict ajax request of data  already loaded
+                if (cj('.container').is(':empty')) {
+                    getContent();
+                }
+                state = true;
+            }
+            else {
+                cj('#map-legend').animate({width: 0, padding: 0}, 1000);
+                state = false;
+            }
+        })
+    }, 1000)    
+    
+     
+    //Tooltip for showing the total counts  
+    cj( '#map-legend-control' ).tooltip();    
+    cj( "#map-legend-control" ).tooltip('option', 'tooltipClass', 'left');
+    cj( "#map-legend-control" ).tooltip('option', 'position', {my: "right center", at: "left-10 center"});            
+            
+});
+
+
+//Ajax request to get the content data
 function getContent() {
-  var helpTabUrl = CRM.url('civicrm/ajax/rest', 'className=CRM_HelpTab_Page_AJAX&fnName=getItems&json=1');
-  cj.ajax(helpTabUrl, {
-    type: 'post',
-    dataType: 'json',
-    data: {cividesk_key : cividesk_key, civicrm_version : civicrm_version},
-    error: function() {
-      alert('Could not fetch the data');
-    },
-    success: function(response) {
-      var container = cj('.container');
-      cj.each(response, function(i, obj) {
-        var viewData = '<h3><a target="_blank" class="title" href="' + obj.url + '">' + obj.title + '</a></h3><div class="context">' + obj.text + '</div>';
-        container.append(viewData);
+    
+    //var helpTabUrl = CRM.url('civicrm/ajax/rest', 'className=CRM_HelpTab_Page_AJAX&fnName=getItems&json=1');    
+    //@todo - temporary url
+    var helpTabUrl = 'getContent.php';
 
-      });
-    }
+    //@todo- temporary data
+    var cividesk_key = 'XXX-my-test-key-XXX';
+    var civicrm_version = '1.0';
 
+    cj.ajax(helpTabUrl, {
+        type: 'post',
+        dataType: 'json',
+        data: {cividesk_key: cividesk_key, civicrm_version: civicrm_version},
+        error: function() {
+            alert('Could not fetch the data');
+        },
+        success: function(response) {
+            var container = cj('.container');
 
+            cj.each(response.result, function(i, obj) {
 
-  });
-    //Implemented listing show-hide using jquery UI
-    cj("#accordion").accordion({
-        event: "click hoverintent",
-        heightStyle: "content"
-    });
+                //@todo - temporary url for tracking of logging info, which will something like - 'http://api.cividesk.com/redirect.php?itemId=XXX';
+                var virtualUrl = 'redirect.php?itemId=' + obj.item_id;
 
-    //Js custom scroll bar
-    cj('.jScrollbar4').jScrollbar();
+                var viewData = '<h3><a target="_blank" class="title" url=' + obj.url + ' href="' + virtualUrl + '">' + obj.title + '</a></h3><div class="context">' + obj.text + '</div>';
+                container.append(viewData);
 
-    //Hide scrollbar for short records - set height as per set in css to 209
-    var contentHeight = cj(".jScrollbar_mask").height();
-    if( contentHeight < 209 ){
-        cj('.jScrollbar_draggable').hide();
-    }
+            });
+            
 
-    //Handle click event for head tag in accordion
-    cj(".title").on("click", function() {
-        var url = cj(this).attr('href');
-        window.open(url, '_blank');
+            //Implemented listing show-hide using jquery UI
+            cj("#accordion").accordion({
+                event: "click hoverintent",
+                heightStyle: "content"
+            });
+
+            //Js custom scroll bar
+            cj('.jScrollbar4').jScrollbar();
+
+            //Hide scrollbar for short records - set height as per set in css to 209
+            var contentHeight = cj(".jScrollbar_mask").height();
+            if (contentHeight < 209) {
+                cj('.jScrollbar_draggable').hide();
+            }
+
+            //Handle click event for head tag in accordion
+            cj(".title").on("click", function(e) {
+                //keep track of logging            
+                setLogs(cj(this).attr('url'), cj(this).attr('href'));
+            });
+
+        }
 
     });
 
 }
-	
+
+//Ajax request to log the info and destination redirection
+function setLogs(real_url, virtual_url) {
+
+    cj.ajax(virtual_url, {
+        type: 'post',
+        data: {real_url: real_url, virtual_url: virtual_url},
+        error: function() {
+            alert('Could not fetch the data');
+        },
+        success: function(response) {
+            if (response == true) {
+                window.open(real_url, '_blank');
+            }
+        }
+
+    });
+
+}
+
 /*
 * hoverIntent | Copyright 2011 Brian Cherne
 * http://cherne.net/brian/resources/jquery.hoverIntent.html

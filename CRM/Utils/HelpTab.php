@@ -25,6 +25,7 @@ class CRM_Utils_HelpTab {
   private static $_singleton = NULL;
 
   private $_settings;
+  private static $_resource_loaded = false;
 
   static function singleton() {
     if (!self::$_singleton) {
@@ -51,8 +52,8 @@ class CRM_Utils_HelpTab {
     CRM_Core_BAO_Setting::setItem($value, CRM_Utils_HelpTab::HELPTAB_PREFERENCES_NAME, $name);
   }
 
-  function addResource() {
-    if ( self::is_public_page() ) {
+  static function addResource() {
+    if ( self::is_public_page() || self::$_resource_loaded ) {
         return;
     }
     $settings = CRM_Utils_HelpTab::getSettings();
@@ -74,6 +75,7 @@ class CRM_Utils_HelpTab {
 
     CRM_Core_Resources::singleton()->addStyleFile('com.cividesk.helptab', 'css/helptab.css');
     CRM_Core_Resources::singleton()->addStyleFile('com.cividesk.helptab', 'css/jScrollbar.jquery.css');
+    self::$_resource_loaded = true;
 
   }
 

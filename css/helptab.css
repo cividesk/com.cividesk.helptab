@@ -6,30 +6,36 @@ body{
   letter-spacing: 0.7px;
 }
 
+#panel {
+  background: none repeat scroll 0 0 transparent;   
+  position: fixed;
+  right: 0;
+  top:180px !important;
+}
+
 #map-legend-control {	
   height: 100%;
   margin: 0;	
   float: right;
-  background-color: #e9e7e7;
+  background: -moz-linear-gradient(right center , #eaeaea, #c5c5c5) repeat scroll 0 0 #e9e7e7;  
   position: relative;
   border-bottom-left-radius:10px;
   border-top-left-radius:10px;
-  border-left: 1px solid #ccc;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  margin-right: -1px;
+  border-left: 1px solid #999;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;  
   top:80px;
-
 }
 
 #map-legend {    
   margin: 0;
-  padding: 12px;
-  float: right;
-  background-color: #f6f6f6;	
+  width:0px;
+  float: right;  
+  background-color: #ffffff;
   border-radius: 7px;
-  border: 1px solid #ccc;
+  border: 1px solid #999;
   height: 209px;
+  margin: -1px;  
 }
 
 #map-legend p {
@@ -43,8 +49,9 @@ body{
   cursor: pointer;
 }
 
+
 .pointer{
-  border-color: transparent #999 transparent transparent;
+  border-color: transparent #666 transparent transparent;
   border-style: solid;
   border-width: 10px 10px 9px 0;    
   float: right;
@@ -56,25 +63,61 @@ body{
   text-decoration: underline !important;    
 }
 
-.jScrollbar4{
-  background-color: #f6f6f6 !important;
-  border-radius: 7px;
-  width: 473px;
-  padding: 0px;
+.jScrollbar4{  
+  background-color:#ffffff !important;
+  border-radius: 7px !important;
+  width: 473px !important;
+  padding: 0px !important;
 }
 
 .jScrollbar4 .jScrollbar_draggable{
   background:none repeat scroll 0 0 #e9e7e7 !important;
 }
 
+.jScrollbar4 .jScrollbar_mask {
+  margin-right: 2px;
+  width: 457px !important;
+}
+
 .jScrollbar4 .jScrollbar_draggable a.draggable{
   cursor: pointer !important;
 }
 
-.jScrollbar_draggable{
+.jScrollbar4 .jScrollbar_draggable{
   margin: 0 !important;
+  background: none !important;
 }
 
 .context{
   font-size: 10px;   
 }
+
+
+.ui-tooltip {
+  background: #FFFF;
+  color: black;
+  /*border: 2px solid #a4c8f5;*/
+  border: 2px solid #999;
+  padding: 0;
+  opacity: 1;
+}
+.ui-tooltip-content {
+  position: relative;
+  padding: 1em;
+}
+.ui-tooltip-content::after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  display: block;
+  width: 0;
+}
+
+.left .ui-tooltip-content::after {
+  top: 18px;
+  right: -10px;
+  /*border-color: transparent #a4c8f5;*/
+  border-color: transparent #999;
+  border-width: 10px 0 10px 10px;
+}
+

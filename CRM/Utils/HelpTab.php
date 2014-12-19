@@ -56,6 +56,8 @@ class CRM_Utils_HelpTab {
     if ( self::is_public_page() || self::$_resource_loaded ) {
         return;
     }
+    $config = CRM_Core_Config::singleton();
+    $civicrm_contex = $_GET[$config->userFrameworkURLVar];
     $settings = CRM_Utils_HelpTab::getSettings();
     $cividesk_key = $settings['cividesk_key'];
     $currentVer = CRM_Core_BAO_Domain::version(true);
@@ -67,6 +69,7 @@ class CRM_Utils_HelpTab {
     CRM_Core_Resources::singleton()->addScript("
        var cividesk_key = '".$cividesk_key."';
        var civicrm_version = '".$civicrm_major_version."';
+       var civicrm_contex = '".$civicrm_contex."';
     ");
 
     CRM_Core_Resources::singleton()->addScript(file_get_contents(dirname(dirname(dirname( __FILE__ )))."/js/helptab.js"));

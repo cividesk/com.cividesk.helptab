@@ -31,7 +31,7 @@ function getContent() {
   cj.ajax(helpTabUrl, {
     type: 'post',
     dataType: 'json',
-    data: {cividesk_key : cividesk_key, civicrm_version : civicrm_version},
+    data: {cividesk_key : cividesk_key, civicrm_version : civicrm_version, civicrm_contex: civicrm_contex },
     error: function() {
       alert('Could not fetch the data');
     },

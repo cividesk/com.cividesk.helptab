@@ -53,7 +53,7 @@ class CRM_Utils_HelpTab {
   }
 
   static function addResource() {
-    if ( self::is_public_page() || self::$_resource_loaded ) {
+    if ( self::is_public_page() || self::$_resource_loaded || array_key_exists('snippet', $_GET) ) {
         return;
     }
     $config = CRM_Core_Config::singleton();

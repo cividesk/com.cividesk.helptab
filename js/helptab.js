@@ -1,67 +1,62 @@
 cj(document).ready(function() {
-  
-    setTimeout(function() {
-        //cj('body').append('<div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control"><span class="pointer"></span><div href="javascript:void()" id="toggle-slide-button"></div></div>');
 
-        var state = false;
-        cj("#toggle-slide-button").live('click', function() {
-            if (!state) {
-                cj('#map-legend').animate({width: 468, padding: 12}, 1000);
+    cj('body').append('<div id="panel"><div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control" title="Looking for help ?" class="left"><span class="pointer"></span><div href="javascript:void()" id="toggle-slide-button"></div></div></div>');
+    var state = false;
+    cj("#toggle-slide-button, #map-legend-control").live('click', function(event) {
+        event.stopImmediatePropagation();
+        if (!state) {
+            state = true;
+            cj('#map-legend').animate({width: 468, padding: 12}, 1000);
+            //Get the content on open of panel
+            //Restrict ajax request of data  already loaded
+            if (cj('.container').is(':empty')) {
+                getContent();
+            }
+        }
+        else {
+            cj('#map-legend').animate({width: 0, padding: 0}, 1000);
+            state = false;
+        }
+    });
 
-                //Get the content on open of panel
-                //Restrict ajax request of data  already loaded
-                if (cj('.container').is(':empty')) {
-                    getContent();
-                }
-                state = true;
-            }
-            else {
-                cj('#map-legend').animate({width: 0, padding: 0}, 1000);
-                state = false;
-            }
-        })
-    }, 1000)    
-    
-     
     //Tooltip for showing the total counts  
-    cj( '#map-legend-control' ).tooltip();    
-    cj( "#map-legend-control" ).tooltip('option', 'tooltipClass', 'left');
-    cj( "#map-legend-control" ).tooltip('option', 'position', {my: "right center", at: "left-10 center"});            
-            
+    cj('#map-legend-control').tooltip();
+    cj("#map-legend-control").tooltip('option', 'tooltipClass', 'left');
+    cj("#map-legend-control").tooltip('option', 'position', {my: "right center", at: "left-10 center"});
 });
 
-
-//Ajax request to get the content data
+//Ajax request to get the data
 function getContent() {
     
-    //var helpTabUrl = CRM.url('civicrm/ajax/rest', 'className=CRM_HelpTab_Page_AJAX&fnName=getItems&json=1');    
-    //@todo - temporary url
-    var helpTabUrl = 'getContent.php';
-
-    //@todo- temporary data
-    var cividesk_key = 'XXX-my-test-key-XXX';
-    var civicrm_version = '1.0';
-
-    cj.ajax(helpTabUrl, {
-        type: 'post',
+    //@todo - Change/removed the following static parameter to valid one 
+    var cividesk_key = 'XXXX';
+    var civicrm_version = '4.4';    
+    //@todo- This will fetch from civicrm code
+    var civicrm_contex = 'civicrm/admin/job';
+    
+    var host = 'http://api.cividesk.com';
+    //var host = 'http://local.cividesk/';
+    
+    /*Actual url for get the content*/       
+    var getContentUrl = host +'helptab/index.php?action=getContent&context=' + civicrm_contex; 
+   
+    cj.ajax(getContentUrl, {
+        type: 'get',
         dataType: 'json',
-        data: {cividesk_key: cividesk_key, civicrm_version: civicrm_version},
+        data: {cividesk_key: cividesk_key, civicrm_version: civicrm_version, civicrm_contex: civicrm_contex},
         error: function() {
             alert('Could not fetch the data');
         },
         success: function(response) {
             var container = cj('.container');
-
             cj.each(response.result, function(i, obj) {
-
-                //@todo - temporary url for tracking of logging info, which will something like - 'http://api.cividesk.com/redirect.php?itemId=XXX';
-                var virtualUrl = 'redirect.php?itemId=' + obj.item_id;
-
-                var viewData = '<h3><a target="_blank" class="title" url=' + obj.url + ' href="' + virtualUrl + '">' + obj.title + '</a></h3><div class="context">' + obj.text + '</div>';
-                container.append(viewData);
+                
+                //Redirect action to log the information and actual redirection
+                var redirectUrl = host + 'helptab/index.php?action=redirect&itemId=' + obj.item_id;
+                var viewData = '<h3><a target="_blank" class="title" url=' + obj.url + ' href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="context">' + obj.text + '</div>';
+                container.append(viewData)
 
             });
-            
 
             //Implemented listing show-hide using jquery UI
             cj("#accordion").accordion({
@@ -81,47 +76,45 @@ function getContent() {
             //Handle click event for head tag in accordion
             cj(".title").on("click", function(e) {
                 //keep track of logging            
-                setLogs(cj(this).attr('url'), cj(this).attr('href'));
+                setLogs(cj(this).attr('url'), cj(this).attr('href'), civicrm_contex);
             });
-
         }
-
     });
-
 }
 
-//Ajax request to log the info and destination redirection
-function setLogs(real_url, virtual_url) {
-
-    cj.ajax(virtual_url, {
-        type: 'post',
-        data: {real_url: real_url, virtual_url: virtual_url},
+/**
+ * Functions to redirect to destination and set the logs
+ * @param {string} url 
+ * @param {string} href
+ * @param {string} civicrm_contex
+ */
+function setLogs(url, href, civicrm_contex) {
+    cj.ajax(href, {
+        type: 'get',
+        data: {href: href, url: url, context: civicrm_contex},
         error: function() {
             alert('Could not fetch the data');
         },
         success: function(response) {
-            if (response == true) {
-                window.open(real_url, '_blank');
+            if (response == 'true') {
+                window.open(url, '_blank');
             }
         }
-
     });
-
 }
-
-/*
-* hoverIntent | Copyright 2011 Brian Cherne
-* http://cherne.net/brian/resources/jquery.hoverIntent.html
-* modified by the jQuery UI team
-* This patch is needed to support for mousehover event for Accordion
+        
+/**
+ * hoverIntent | Copyright 2011 Brian Cherne
+ * http://cherne.net/brian/resources/jquery.hoverIntent.html
+ * modified by the jQuery UI team
+ * This patch is needed to support for mousehover event for Accordion
 */
-
 cj.event.special.hoverintent = {
   setup: function() {
-    cj(this).bind("mouseover", jQuery.event.special.hoverintent.handler);
+    cj(this).bind("mouseover", cj.event.special.hoverintent.handler);
   },
   teardown: function() {
-    cj(this).unbind("mouseover", jQuery.event.special.hoverintent.handler);
+    cj(this).unbind("mouseover", cj.event.special.hoverintent.handler);
   },
   handler: function(event) {
     var currentX, currentY, timeout,

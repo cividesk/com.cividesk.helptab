@@ -1,22 +1,25 @@
 <?php
 // Database settings 
-$db = array(
+$credentials = array(
     'helptab' => array(
         'hostname' => 'localhost',
-        'database' => 'helptab',
+        'database' => 'civi_test_db',
+        'username' => 'root',
+        'password' => '',
+    ),
+    'customer' => array(
+        'hostname' => 'localhost',
+        'database' => 'civi_test_db',
+        'username' => 'root',
+        'password' => '',
+    ),
+    'osticket' => array(
+        'hostname' => 'localhost',
+        'database' => 'civi_test_db',
         'username' => 'root',
         'password' => '',
     ),
 );
-
-//Created PDO object
-try {
-    $dbh = new PDO('mysql:dbname='.$db['helptab']['database'].';host='.$db['helptab']['hostname'],
-        $db['helptab']['username'], $db['helptab']['password']);
-} catch (PDOException $e) {
-    echo "Failed to get DB handle: ".$e->getMessage()."\n";
-    exit;
-}
 
 // Various options
 $options = array(

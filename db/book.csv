@@ -1,0 +1,6 @@
+version,id,title,context
+,initial-set-up/installation-and-basic-setup/,Installation & Basic Set-up,civicrm/admin
+,initial-set-up/scheduled-jobs/,Scheduled jobs,civicrm/admin/job
+,initial-set-up/customizing-the-user-interface/,Customizing the user interface,civicrm/admin/options | civicrm/admin/setting/preferences/display | civicrm/admin/setting/search | civicrm/admin/menu | civicrm/admin/uf/group
+,initial-set-up/permissions-and-access-control/,Permissions and access control,civicrm/admin/access | civicrm/acl
+,initial-set-up/security/,Security,civicrm/admin/setting/url

@@ -1,12 +1,22 @@
 <?php
 /**
  * This is a home page.
- * 
- */
+*/
+
+//Get the content data
+if( isset($_GET['action']) && $_GET['action'] == 'getContent'){       
+    include_once 'getContent.php';        
+}
+
+//Redirect to destination and logged the data
+if( isset($_GET['action']) && $_GET['action'] == 'redirect'){                
+    include_once 'redirect.php';        
+}
 
 //Set the base url
 $base_url = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER["REQUEST_URI"].'?').'/'; 
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -30,26 +40,6 @@ $base_url = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER["REQUEST_URI"].'?')
                    
     </head>
     
-    <body>
-        <div id="panel">            
-            <div id="map-legend">	                            
-                <div class="jScrollbar4">
-                    <div class="jScrollbar_mask">
-
-                        <div id="accordion" class="container"></div>
-
-                    </div>                    
-                    <div class="jScrollbar_draggable">
-                        <a href="#" class="draggable"></a>
-                    </div>
-                </div>
-            </div>                        
-            
-            <div id="map-legend-control" title="Looking for help ?" class="left">
-                <span class="pointer"></span>
-                <div href="javascript:void()" id="toggle-slide-button"></div>
-            </div>
-        </div>               
-    </body>
+    <body> </body>    
 </html>
 

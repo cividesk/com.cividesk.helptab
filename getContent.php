@@ -7,22 +7,26 @@ include_once '/utils/database.php';
 $dbh = open_database('helptab'); 
 $records = $result = $context = array();
 
-if(isset($_GET['context'])){
-    $context = explode('/', $_GET['context']);
+if(isset($_GET['context'])) {
+    $contextArr = explode('/', $_GET['context']);
 }
 
-//Build query for context
-for($i=0; $i<count($context); $i++){
-    $contextArr[] = "'%".$context[$i]."%'" ;
+for($i=0; $i<count($contextArr); $i++ ){           
+        if($i == 0){
+            $result[] = $contextArr[$i];
+        }else {
+            $result[] = $result[$i-1].'/'.$contextArr[$i];          
+        }       
 }
-$where = implode(' OR ', $contextArr);
+
+$context = "'" . implode("','", $result) . "'";
 
 // Prepare database statements for getting the content
 $stmt = array(
     'search' => $dbh->prepare("SELECT * FROM help_item "
                                 . "INNER JOIN help_mapping "
                                 . "ON help_item.id = help_mapping.item_id "
-                                . "WHERE help_mapping.context LIKE" . $where
+                                . "WHERE help_mapping.context IN (" . $context . ")"
                             )
 );
 

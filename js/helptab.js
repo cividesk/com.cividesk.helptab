@@ -27,23 +27,27 @@ cj(document).ready(function() {
 
 //Ajax request to get the data
 function getContent() {
-  var helpTabUrl = CRM.url('civicrm/ajax/rest', 'className=CRM_HelpTab_Page_AJAX&fnName=getItems&json=1');
-  cj.ajax(helpTabUrl, {
+  var helpTabUrl = 'https://api.cividesk.com/helptab/index.php';
+  var getcontent = helpTabUrl + '?action=getContent';
+  cj.ajax(getcontent, {
     type: 'post',
     dataType: 'json',
-    data: {cividesk_key : cividesk_key, civicrm_version : civicrm_version, civicrm_contex: civicrm_contex },
+    data: {cividesk_key : cividesk_key, civicrm_version : civicrm_version, context: civicrm_contex },
     error: function() {
-      alert('Could not fetch the data');
+      alert('Could not retrieve data from HelpTab');
     },
     success: function(response) {
       var container = cj('.container');
       cj.each(response.result, function(i, obj) {
         //@todo - temporary url for tracking of logging info, which will something like - 'http://api.cividesk.com/redirect.php?itemId=XXX';
-        var virtualUrl = 'redirect.php?itemId=' + obj.item_id;
-        var viewData = '<h3><a target="_blank" class="title" url=' + obj.url + ' href="' + virtualUrl + '">' + obj.title + '</a></h3><div class="context">' + obj.text + '</div>';
+        var redirectUrl = helpTabUrl + '?action=redirect&itemId=' + obj.item_id;
+        var viewData = '<h3><a target="_blank" class="title" url=' + obj.url + ' href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="context">' + obj.text + '</div>';
         container.append(viewData)
 
       });
+      if ( Object.keys(response.result).length == 0 ) {
+        container.append('Help content not available');
+      }
       //cj('#total_record').html(response.total);
       
       //Implemented listing show-hide using jquery UI
@@ -64,12 +68,33 @@ function getContent() {
       //Handle click event for head tag in accordion
       cj(".title").on("click", function(e) {
         //keep track of logging            
-        //setLogs(cj(this).attr('url'), cj(this).attr('href'));
+        setLogs(cj(this).attr('url'), cj(this).attr('href'), civicrm_contex);
       });
     }
   });
 }
-	
+
+/**
+ * Functions to redirect to destination and set the logs
+ * @param {string} url
+ * @param {string} href
+ * @param {string} civicrm_contex
+ */
+function setLogs(url, href, civicrm_contex) {
+  cj.ajax(href, {
+    type: 'get',
+    data: {href: href, url: url, context: civicrm_contex},
+    error: function() {
+      alert('Unable to open help page');
+    },
+    success: function(response) {
+      if (response == 'true') {
+        window.open(url, '_blank');
+      }
+    }
+  });
+}
+
 /*
 * hoverIntent | Copyright 2011 Brian Cherne
 * http://cherne.net/brian/resources/jquery.hoverIntent.html

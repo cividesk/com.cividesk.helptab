@@ -11,6 +11,7 @@ body{
   position: fixed;
   right: 0;
   top:180px !important;
+  z-index: 9999999 !important;
 }
 
 #map-legend-control {	

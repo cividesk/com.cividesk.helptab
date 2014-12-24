@@ -1,7 +1,8 @@
 cj(document).ready(function() {
 
-    cj('body').append('<div id="panel"><div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control" title="Looking for help ?" class="left"><span class="pointer"></span><div href="javascript:void()" id="toggle-slide-button"></div></div></div>');
+    cj('body').append('<span class="question"></span><div id="panel"><div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control" title="Looking for help ?" class="left"><span class="pointer"></span><div href="javascript:void()" id="toggle-slide-button"></div></div></div>');
     var state = false;
+    cj('.question').hide();
     cj("#toggle-slide-button, #map-legend-control").live('click', function(event) {
         event.stopImmediatePropagation();
         if (!state) {
@@ -11,18 +12,29 @@ cj(document).ready(function() {
             //Restrict ajax request of data  already loaded
             if (cj('.container').is(':empty')) {
                 getContent();
-            }
+            }       
+            
+            setTimeout(function(){
+                cj('.question').toggle('bounce',2000)
+            },1000);            
+            
         }
         else {
             cj('#map-legend').animate({width: 0, padding: 0}, 1000);
             state = false;
+            cj('.question').hide();
         }
     });
-
+    
     //Tooltip for showing the total counts  
     cj('#map-legend-control').tooltip();
     cj("#map-legend-control").tooltip('option', 'tooltipClass', 'left');
     cj("#map-legend-control").tooltip('option', 'position', {my: "right center", at: "left-10 center"});
+    
+    //Tooltip for display of counts
+   
+   
+   
 });
 
 //Ajax request to get the data
@@ -34,8 +46,8 @@ function getContent() {
     //@todo- This will fetch from civicrm code
     var civicrm_contex = 'civicrm/admin/job';
     
-    var host = 'http://api.cividesk.com';
-    //var host = 'http://local.cividesk/';
+    //var host = 'http://api.cividesk.com';
+    var host = 'http://local.cividesk/';
     
     /*Actual url for get the content*/       
     var getContentUrl = host +'helptab/index.php?action=getContent&context=' + civicrm_contex; 
@@ -51,6 +63,9 @@ function getContent() {
             var container = cj('.container');
             cj.each(response.result, function(i, obj) {
                 
+                if(response.counts > 0){
+                    cj(".question").text("Help Count-" + response.counts);
+                }
                 //Redirect action to log the information and actual redirection
                 var redirectUrl = host + 'helptab/index.php?action=redirect&itemId=' + obj.item_id;
                 var viewData = '<h3><a target="_blank" class="title" url=' + obj.url + ' href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="context">' + obj.text + '</div>';

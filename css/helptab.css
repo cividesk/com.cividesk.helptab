@@ -121,3 +121,23 @@ body{
   border-width: 10px 0 10px 10px;
 }
 
+span.question {
+background-color: #666666;
+    border-radius: 29px;
+    color: White;
+    cursor: pointer;
+    display: block;
+    float: right;
+    font-size: 9px;
+    font-weight: bold;
+    height: 50px;
+    line-height: 16px;
+    margin: 0 -30px 0 0;
+    position: relative;
+    right: 487px;
+    text-align: center;
+    top: 117px;
+    width: 50px;
+    padding-top: 3px;
+
+}

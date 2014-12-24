@@ -45,8 +45,8 @@ function getContent() {
         container.append(viewData)
 
       });
-      if ( Object.keys(response.result).length == 0 ) {
-        container.append('Help content not available');
+      if (response.result.length == 0 ) {
+        cj('#map-legend').empty().append('<div style="text-align:center;vertical-align: middle;padding-top:100px;">Help content not available.</div>');
       }
       //cj('#total_record').html(response.total);
       

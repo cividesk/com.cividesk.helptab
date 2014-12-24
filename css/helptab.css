@@ -9,6 +9,7 @@ body{
 #panel {
   background: none repeat scroll 0 0 transparent;   
   position: fixed;
+  margin-right: -2px;
   right: 0;
   top:180px !important;
   z-index: 9999999 !important;

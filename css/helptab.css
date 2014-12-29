@@ -10,6 +10,7 @@ body{
   background: none repeat scroll 0 0 transparent;   
   position: fixed;
   right: 0;
+  margin-right: -2px;
   top:180px !important;
 }
 

@@ -46,13 +46,13 @@ function getContent() {
     //@todo- This will fetch from civicrm code
     var civicrm_contex = 'civicrm/admin/job';
     
-    //var host = 'http://api.cividesk.com';
-    var host = 'http://local.cividesk/';
+    //var helpTabUrl = 'http://local.cividesk/helptab/index.php';
+    var helpTabUrl = 'https://api.cividesk.com/helptab/index.php';       
     
     /*Actual url for get the content*/       
-    var getContentUrl = host +'helptab/index.php?action=getContent&context=' + civicrm_contex; 
+    var getcontent = helpTabUrl + '?action=getContent';
    
-    cj.ajax(getContentUrl, {
+    cj.ajax(getcontent, {
         type: 'get',
         dataType: 'json',
         data: {cividesk_key: cividesk_key, civicrm_version: civicrm_version, civicrm_contex: civicrm_contex},
@@ -67,12 +67,24 @@ function getContent() {
                     cj(".question").text("Help Count-" + response.counts);
                 }
                 //Redirect action to log the information and actual redirection
-                var redirectUrl = host + 'helptab/index.php?action=redirect&itemId=' + obj.item_id;
+                var redirectUrl = helpTabUrl + '?action=redirect&itemId=' + obj.item_id;
                 var viewData = '<h3><a target="_blank" class="title" url=' + obj.url + ' href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="context">' + obj.text + '</div>';
                 container.append(viewData)
 
             });
 
+             //Show help count buncing 
+            if (response.counts > 0) {                
+                cj(".question").text("Help Count-" + response.counts);
+            } else {                
+                cj(".question").text("Help Count- 0");
+            }
+            
+            //Show empty message
+            if (response.result.length == 0 ) {
+                cj('#map-legend').empty().append('<div style="text-align:center;vertical-align: middle;padding-top:100px;">Help content not available.</div>');
+            }
+      
             //Implemented listing show-hide using jquery UI
             cj("#accordion").accordion({
                 event: "click hoverintent",

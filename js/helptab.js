@@ -1,15 +1,18 @@
 cj(document).ready(function() {
 
-  cj('body').append('<div id="panel"><div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control" title="Looking for help ?" class="left"><span class="pointer"></span><div href="javascript:void()" id="toggle-slide-button"></div></div></div>');
+  cj('body').append('<div id="panel"><div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control" title="Looking for help ?" class="left"><span class="pointer"><span id="count" style="display: none;"></span></span><div href="javascript:void()" id="toggle-slide-button"></div></div></div>');
     var state = false;
     cj("#toggle-slide-button, #map-legend-control").live('click', function(event) {
       event.stopImmediatePropagation();
       if (!state) {
-        state = true; 
-        cj('#map-legend').animate({width: 468, padding: 12}, 1000);
+        state = true;
+        if (! cj('.container').is(':empty')) {
+          cj('#map-legend').animate({width: 468, padding: 12}, 1000);
+        }
         //Get the content on open of panel
         //Restrict ajax request of data  already loaded
         if (cj('.container').is(':empty')) {
+          cj("#count").text('Loading').show();
           getContent();
         }
       }
@@ -38,6 +41,11 @@ function getContent() {
     },
     success: function(response) {
       var container = cj('.container');
+      cj("#count").hide();
+      cj('#map-legend').animate({width: 468, padding: 12}, 1000);
+      if(response.counts > 0){
+        cj("#count").text(response.counts).css({'margin-top':'-12px'}).show('slow');
+      }
       cj.each(response.result, function(i, obj) {
         //@todo - temporary url for tracking of logging info, which will something like - 'http://api.cividesk.com/redirect.php?itemId=XXX';
         var redirectUrl = helpTabUrl + '?action=redirect&itemId=' + obj.item_id;

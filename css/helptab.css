@@ -131,6 +131,7 @@ span#count {
   font-size: 14px;
   font-weight: bold;
   text-align: center;
+  word-wrap: normal !important;
   width: 25px;
   height: 25px;
   margin-top: -35px;

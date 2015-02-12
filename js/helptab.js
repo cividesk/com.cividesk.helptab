@@ -1,8 +1,8 @@
 cj(document).ready(function() {
 
-  cj('body').append('<div id="panel"><div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control" title="Looking for help ?" class="left"><span class="pointer"><span id="count" style="display: none;"></span></span><div href="javascript:void()" id="toggle-slide-button"></div></div></div>');
+  cj('body').append('<div id="panel"><div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" style="text-align: left;" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control" title="Looking for help ?" class="left"><span class="pointer"><span id="count" style="display: none;"></span></span><div href="javascript:void()" id="toggle-slide-button"></div></div></div>');
     var state = false;
-    cj("#toggle-slide-button, #map-legend-control").live('click', function(event) {
+    cj("body").on('click', '#map-legend-control, span#count', function(event) {
       event.stopImmediatePropagation();
       if (!state) {
         state = true;
@@ -49,7 +49,7 @@ function getContent() {
       cj.each(response.result, function(i, obj) {
         //@todo - temporary url for tracking of logging info, which will something like - 'http://api.cividesk.com/redirect.php?itemId=XXX';
         var redirectUrl = helpTabUrl + '?action=redirect&itemId=' + obj.item_id;
-        var viewData = '<h3><a target="_blank" class="title" url=' + obj.url + ' href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="context">' + obj.text + '</div>';
+        var viewData = '<h3><a target="_blank" class="title" style="font-weight: normal;font-size: 1em;" url=' + obj.url + ' href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="context">' + obj.text + '</div>';
         container.append(viewData)
 
       });

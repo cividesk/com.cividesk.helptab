@@ -73,8 +73,10 @@ class CRM_Utils_HelpTab {
     ");
 
     CRM_Core_Resources::singleton()->addScript(file_get_contents(dirname(dirname(dirname( __FILE__ )))."/js/helptab.js"));
-    CRM_Core_Resources::singleton()->addScriptFile('com.cividesk.helptab', "js/jquery-mousewheel.js" );
-    CRM_Core_Resources::singleton()->addScriptFile('com.cividesk.helptab', "js/jScrollbar.jquery.js" );
+    CRM_Core_Resources::singleton()->addScript(file_get_contents(dirname(dirname(dirname( __FILE__ )))."/js/jquery-mousewheel.js"));
+    CRM_Core_Resources::singleton()->addScript(file_get_contents(dirname(dirname(dirname( __FILE__ )))."/js/jScrollbar.jquery.js"));
+    //CRM_Core_Resources::singleton()->addScriptFile('com.cividesk.helptab', "js/jquery-mousewheel.js" );
+    //CRM_Core_Resources::singleton()->addScriptFile('com.cividesk.helptab', "js/jScrollbar.jquery.js" );
 
     CRM_Core_Resources::singleton()->addStyleFile('com.cividesk.helptab', 'css/helptab.css');
     CRM_Core_Resources::singleton()->addStyleFile('com.cividesk.helptab', 'css/jScrollbar.jquery.css');

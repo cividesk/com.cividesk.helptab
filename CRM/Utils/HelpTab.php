@@ -59,7 +59,7 @@ class CRM_Utils_HelpTab {
     $config = CRM_Core_Config::singleton();
     $civicrm_contex = $_GET[$config->userFrameworkURLVar];
     $settings = CRM_Utils_HelpTab::getSettings();
-    $cividesk_key = $settings['cividesk_key'];
+    $cividesk_key = CRM_Utils_Array::value( 'cividesk_key', $settings);
     $currentVer = CRM_Core_BAO_Domain::version(true);
       $civicrm_major_version = '';
     if (preg_match('/[\d]+[\.][\d]+/', $currentVer, $matches)) {

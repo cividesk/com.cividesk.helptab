@@ -1,31 +1,32 @@
 cj(document).ready(function() {
 
   cj('body').append('<div id="helptab-panel"><div id="helptab-map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="helptab-accordion" style="text-align: left;" class="helptab-container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="helptab-map-legend-control" title="Looking for help ?" class="left"><span class="helptab-pointer"><span id="helptab-count" style="display: none;"></span></span><div href="javascript:void()" id="helptab-toggle-slide-button"></div></div></div>');
-    var state = false;
-    cj("body").on('click', '#helptab-map-legend-control, span#helptab-count', function(event) {
-      event.stopImmediatePropagation();
-      if (!state) {
-        state = true;
-        if (! cj('.helptab-container').is(':empty')) {
-          cj('#helptab-map-legend').animate({width: 468, padding: 12}, 1000);
-        }
-        //Get the content on open of panel
-        //Restrict ajax request of data  already loaded
-        if (cj('.helptab-container').is(':empty')) {
-          cj("#helptab-count").text('Loading').show();
-          getContent();
-        }
+  var state = false;
+  cj("body").on('click', '#helptab-map-legend-control, span#helptab-count', function(event) {
+    event.stopImmediatePropagation();
+    if (!state) {
+      state = true;
+      if (! cj('.helptab-container').is(':empty')) {
+        cj('#helptab-map-legend').animate({width: 468, padding: 12}, 1000);
       }
-      else {
-        cj('#helptab-map-legend').animate({width: 0, padding: 0}, 1000);
-        state = false;
+      //Get the content on open of panel
+      //Restrict ajax request of data  already loaded
+      if (cj('.helptab-container').is(':empty')) {
+        cj("#helptab-count").text('Loading').show();
+        getContent();
       }
-    })
-
-  //Tooltip for showing the total counts  
-  cj( '#helptab-map-legend-control' ).tooltip();
-  cj( "#helptab-map-legend-control" ).tooltip('option', 'tooltipClass', 'left');
-  cj( "#helptab-map-legend-control" ).tooltip('option', 'position', {my: "right center", at: "left-10 center"});
+    }
+    else {
+      cj('#helptab-map-legend').animate({width: 0, padding: 0}, 1000);
+      state = false;
+    }
+  });
+  if ( parseInt(cj.fn.jquery.replace(/\./gi,'').substring(0,3)) >= 183 ) {
+    //Tooltip for showing the total counts
+    cj( '#helptab-map-legend-control' ).tooltip();
+    cj( "#helptab-map-legend-control" ).tooltip('option', 'tooltipClass', 'left');
+    cj( "#helptab-map-legend-control" ).tooltip('option', 'position', {my: "right center", at: "left-10 center"});
+  }
 });
 
 //Ajax request to get the data

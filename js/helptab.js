@@ -1,31 +1,31 @@
 cj(document).ready(function() {
 
-  cj('body').append('<div id="panel"><div id="map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="accordion" style="text-align: left;" class="container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="map-legend-control" title="Looking for help ?" class="left"><span class="pointer"><span id="count" style="display: none;"></span></span><div href="javascript:void()" id="toggle-slide-button"></div></div></div>');
+  cj('body').append('<div id="helptab-panel"><div id="helptab-map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="helptab-accordion" style="text-align: left;" class="helptab-container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="helptab-map-legend-control" title="Looking for help ?" class="left"><span class="helptab-pointer"><span id="helptab-count" style="display: none;"></span></span><div href="javascript:void()" id="helptab-toggle-slide-button"></div></div></div>');
     var state = false;
-    cj("body").on('click', '#map-legend-control, span#count', function(event) {
+    cj("body").on('click', '#helptab-map-legend-control, span#helptab-count', function(event) {
       event.stopImmediatePropagation();
       if (!state) {
         state = true;
-        if (! cj('.container').is(':empty')) {
-          cj('#map-legend').animate({width: 468, padding: 12}, 1000);
+        if (! cj('.helptab-container').is(':empty')) {
+          cj('#helptab-map-legend').animate({width: 468, padding: 12}, 1000);
         }
         //Get the content on open of panel
         //Restrict ajax request of data  already loaded
-        if (cj('.container').is(':empty')) {
-          cj("#count").text('Loading').show();
+        if (cj('.helptab-container').is(':empty')) {
+          cj("#helptab-count").text('Loading').show();
           getContent();
         }
       }
       else {
-        cj('#map-legend').animate({width: 0, padding: 0}, 1000);
+        cj('#helptab-map-legend').animate({width: 0, padding: 0}, 1000);
         state = false;
       }
     })
 
   //Tooltip for showing the total counts  
-  cj( '#map-legend-control' ).tooltip();    
-  cj( "#map-legend-control" ).tooltip('option', 'tooltipClass', 'left');
-  cj( "#map-legend-control" ).tooltip('option', 'position', {my: "right center", at: "left-10 center"});
+  cj( '#helptab-map-legend-control' ).tooltip();
+  cj( "#helptab-map-legend-control" ).tooltip('option', 'tooltipClass', 'left');
+  cj( "#helptab-map-legend-control" ).tooltip('option', 'position', {my: "right center", at: "left-10 center"});
 });
 
 //Ajax request to get the data
@@ -40,26 +40,26 @@ function getContent() {
       alert('Could not retrieve data from HelpTab');
     },
     success: function(response) {
-      var container = cj('.container');
-      cj("#count").hide();
-      cj('#map-legend').animate({width: 468, padding: 12}, 1000);
+      var container = cj('.helptab-container');
+      cj("#helptab-count").hide();
+      cj('#helptab-map-legend').animate({width: 468, padding: 12}, 1000);
       if(response.counts > 0){
-        cj("#count").text(response.counts).css({'margin-top':'-12px'}).show('slow');
+        cj("#helptab-count").text(response.counts).css({'margin-top':'-12px'}).show('slow');
       }
       cj.each(response.result, function(i, obj) {
         //@todo - temporary url for tracking of logging info, which will something like - 'http://api.cividesk.com/redirect.php?itemId=XXX';
         var redirectUrl = helpTabUrl + '?action=redirect&itemId=' + obj.item_id;
-        var viewData = '<h3><a target="_blank" class="title" style="font-weight: normal;font-size: 1em;" url=' + obj.url + ' href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="context">' + obj.text + '</div>';
+        var viewData = '<h3><a target="_blank" class="helptab-title" style="font-weight: normal;font-size: 1em;" url=' + obj.url + ' href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="helptab-context">' + obj.text + '</div>';
         container.append(viewData)
 
       });
       if (response.result.length == 0 ) {
-        cj('#map-legend').empty().append('<div style="text-align:center;vertical-align: middle;padding-top:100px;">Help content not available.</div>');
+        cj('#helptab-map-legend').empty().append('<div style="text-align:center;vertical-align: middle;padding-top:100px;">Help content not available.</div>');
       }
       //cj('#total_record').html(response.total);
       
       //Implemented listing show-hide using jquery UI
-      cj("#accordion").accordion({
+      cj("#helptab-accordion").accordion({
         event: "click hoverintent",
         heightStyle: "content"
       });
@@ -74,7 +74,7 @@ function getContent() {
       }
 
       //Handle click event for head tag in accordion
-      cj(".title").on("click", function(e) {
+      cj(".helptab-title").on("click", function(e) {
         //keep track of logging            
         setLogs(cj(this).attr('url'), cj(this).attr('href'), civicrm_contex);
       });

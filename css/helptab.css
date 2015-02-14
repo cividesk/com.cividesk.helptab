@@ -1,23 +1,20 @@
 /* CSS Document */
 
-body{
-  overflow-x: hidden;
-  font: 12px "freight-sans-pro",sans-serif !important;
-  letter-spacing: 0.7px;
-}
-
-#panel {
+#helptab-panel {
   background: none repeat scroll 0 0 transparent;   
   position: fixed;
   margin-right: -2px;
   right: 0;
   top:180px !important;
   z-index: 9999999 !important;
+  overflow-x: hidden;
+  font: 12px "freight-sans-pro",sans-serif !important;
+  letter-spacing: 0.7px;
 }
 
-#map-legend-control {	
+#helptab-map-legend-control {
   height: 100%;
-  margin: 0;	
+  margin: 0;
   float: right;
   background: -moz-linear-gradient(right center , #eaeaea, #c5c5c5) repeat scroll 0 0 #e9e7e7;  
   position: relative;
@@ -30,7 +27,7 @@ body{
   top:80px;
 }
 
-#map-legend {    
+#helptab-map-legend {
   margin: 0;
   width:0px;
   float: right;  
@@ -41,19 +38,19 @@ body{
   margin: -1px;  
 }
 
-#map-legend p {
+#helptab-map-legend p {
   padding-left: 25px;
   width: 400px;
 }
 
-#toggle-slide-button {
+#helptab-toggle-slide-button {
   width:30px;
   height:80px;
   cursor: pointer;
 }
 
 
-.pointer{
+.helptab-pointer{
   border-color: transparent #666 transparent transparent;
   border-style: solid;
   border-width: 10px 10px 9px 0;    
@@ -62,7 +59,7 @@ body{
   margin-top: 32px;
 }
 
-.title{
+.helptab-title{
   text-decoration: underline !important;    
 }
 
@@ -91,14 +88,14 @@ body{
   background: none !important;
 }
 
-.context{
+.helptab-context{
   font-size: 10px;   
 }
 
 
 .ui-tooltip {
-  background: #FFFF;
-  color: black;
+  background: #FFFFFF;
+  color: #000000;
   /*border: 2px solid #a4c8f5;*/
   border: 2px solid #999;
   padding: 0;
@@ -124,7 +121,7 @@ body{
   border-width: 10px 0 10px 10px;
 }
 
-span#count {
+span#helptab-count {
   cursor: pointer;
   display: block;
   float: right;

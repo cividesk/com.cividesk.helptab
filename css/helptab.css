@@ -7,9 +7,9 @@
   right: 0;
   top:180px !important;
   z-index: 9999999 !important;
-  overflow-x: hidden;
   font: 12px "freight-sans-pro",sans-serif !important;
   letter-spacing: 0.7px;
+  width:530px
 }
 
 #helptab-map-legend-control {

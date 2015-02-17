@@ -9,15 +9,12 @@
   z-index: 9999999 !important;
   font: 12px "freight-sans-pro",sans-serif !important;
   letter-spacing: 0.7px;
-  width:530px
 }
 
 #helptab-map-legend-control {
-  height: 100%;
   margin: 0;
   float: right;
   background: -moz-linear-gradient(right center , #eaeaea, #c5c5c5) repeat scroll 0 0 #e9e7e7;  
-  position: relative;
   border-bottom-left-radius:10px;
   border-top-left-radius:10px;
   border-left: 1px solid #999;
@@ -25,6 +22,9 @@
   border-bottom: 1px solid #999;
   background-color: #e6e6e6;
   top:80px;
+  position: absolute;
+  width: 36px;
+  left: -37px;
 }
 
 #helptab-map-legend {

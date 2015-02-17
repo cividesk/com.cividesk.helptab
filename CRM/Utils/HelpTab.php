@@ -84,7 +84,7 @@ class CRM_Utils_HelpTab {
 
   }
 
-  function is_public_page() {
+  static function is_public_page() {
     // Get the menu items.
     $args = explode('?', $_GET['q']);
     $path = $args[0];

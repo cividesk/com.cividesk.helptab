@@ -49,10 +49,9 @@ function getContent() {
       }
       cj.each(response.result, function(i, obj) {
         //@todo - temporary url for tracking of logging info, which will something like - 'http://api.cividesk.com/redirect.php?itemId=XXX';
-        var redirectUrl = helpTabUrl + '?action=redirect&itemId=' + obj.item_id;
-        var viewData = '<h3><a target="_blank" class="helptab-title" style="font-weight: normal;font-size: 1em;" url=' + obj.url + ' href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="helptab-context">' + obj.text + '</div>';
+        var redirectUrl = helpTabUrl + '?action=redirect&itemId=' + obj.item_id  ;
+        var viewData = '<h3><a target="_blank" class="helptab-title" style="font-weight: normal;font-size: 1em;" href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="helptab-context">' + obj.text + '</div>';
         container.append(viewData)
-
       });
       if (response.result.length == 0 ) {
         cj('#helptab-map-legend').empty().append('<div style="text-align:center;vertical-align: middle;padding-top:100px;">Help content not available.</div>');
@@ -77,7 +76,8 @@ function getContent() {
       //Handle click event for head tag in accordion
       cj(".helptab-title").on("click", function(e) {
         //keep track of logging            
-        setLogs(cj(this).attr('url'), cj(this).attr('href'), civicrm_contex);
+        //setLogs(cj(this).attr('url'), cj(this).attr('href'), civicrm_contex);
+        window.open(cj(this).attr('href') +'&cividesk_key='+cividesk_key +'&context='+civicrm_contex , '_blank');
       });
     }
   });

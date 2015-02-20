@@ -36,7 +36,7 @@ class CRM_Admin_Form_Setting_HelpTab extends CRM_Admin_Form_Setting {
   public function buildQuickForm() {
     $this->applyFilter('__ALL__', 'trim');
 
-    $this->add('text', "cividesk_key", ts("Civideks Key"), '', true);
+    $this->add('text', "cividesk_key", ts("Cividesk key"), '', true);
   
     $this->addFormRule(array('CRM_Admin_Form_Setting_HelpTab', 'formRule'));
     

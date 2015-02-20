@@ -26,7 +26,7 @@
       <table class="form-layout-compressed">
         <tr class="crm-cividesk-helptab-form-block">
           <td class="label">{$form.cividesk_key.label}</td>
-          <td>{$form.cividesk_key.html}</td>
+          <td>{$form.cividesk_key.html} (<a href="https://www.cividesk.com/helptab/register" target="_blank">register</a>)</td>
         </tr>
       </table>
       <div class="crm-submit-buttons">{include file="CRM/common/formButtons.tpl" location="bottom"}</div>

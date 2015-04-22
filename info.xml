@@ -17,6 +17,9 @@
     <ver>4.4</ver>
     <ver>4.5</ver>
   </compatibility>
+  <documentation>
+    <url desc="Github page">https://github.com/cividesk/com.cividesk.helptab</url>
+  </documentation
   <comments>This will install a help tab on the right side of CiviCRM screens. Opening that tab will display a list of resources relevant for the current page. Brought to you by Cividesk.</comments>
   <civix>
     <namespace>CRM/Helptab</namespace>

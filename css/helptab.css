@@ -1,7 +1,7 @@
 /* CSS Document */
 
 #helptab-panel {
-  background: none repeat scroll 0 0 transparent;   
+  background: none repeat scroll 0 0 transparent;
   position: fixed;
   margin-right: -2px;
   right: 0;
@@ -14,7 +14,7 @@
 #helptab-map-legend-control {
   margin: 0;
   float: right;
-  background: -moz-linear-gradient(right center , #eaeaea, #c5c5c5) repeat scroll 0 0 #e9e7e7;  
+  background: -moz-linear-gradient(right center , #eaeaea, #c5c5c5) repeat scroll 0 0 #e9e7e7;
   border-bottom-left-radius:10px;
   border-top-left-radius:10px;
   border-left: 1px solid #999;
@@ -30,12 +30,12 @@
 #helptab-map-legend {
   margin: 0;
   width:0px;
-  float: right;  
+  float: right;
   background-color: #ffffff;
   border-radius: 7px;
   border: 1px solid #999;
   height: 209px;
-  margin: -1px;  
+  margin: -1px;
 }
 
 #helptab-map-legend p {
@@ -53,17 +53,17 @@
 .helptab-pointer{
   border-color: transparent #666 transparent transparent;
   border-style: solid;
-  border-width: 10px 10px 9px 0;    
+  border-width: 10px 10px 9px 0;
   float: right;
   height: 0;
   margin-top: 32px;
 }
 
 .helptab-title{
-  text-decoration: underline !important;    
+  text-decoration: underline !important;
 }
 
-.jScrollbar4{  
+.jScrollbar4{
   background-color:#ffffff !important;
   border-radius: 7px !important;
   width: 473px !important;
@@ -76,7 +76,7 @@
 
 .jScrollbar4 .jScrollbar_mask {
   margin-right: 2px;
-  width: 457px !important;
+  width: 470px !important;
 }
 
 .jScrollbar4 .jScrollbar_draggable a.draggable{
@@ -89,7 +89,7 @@
 }
 
 .helptab-context{
-  font-size: 10px;   
+  font-size: 10px;
 }
 
 
@@ -139,3 +139,106 @@ span#helptab-count {
   -ms-transform: rotate(90deg);
   -o-transform: rotate(90deg);
 }
+
+.help-tab-title-h3 {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    color: #212121;
+    display: block;
+    font-weight: normal;
+    padding: 7px 5px;
+    background: #ededed;
+    margin: 5px 1px;
+}
+
+.help-tab-title-h3 a  {
+    color: #555555;
+    font-family:Georgia,"Times New Roman",Times,serif;
+    font-weight: normal;
+    margin-left: 30px;
+}
+
+.helptab_iconClass {
+    display: block;
+    margin-left: -3px;
+    margin-top: -5px;
+    position: absolute;
+    cursor: pointer;
+}
+
+#helptab-icon-search {
+    background: transparent url("images/search.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+#helptab-icon-civimail {
+    background: transparent url("images/civimail.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+
+#helptab-icon-contact {
+    background: transparent url("images/contact.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+
+#helptab-icon-contribution {
+    background: transparent url("images/contribution.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+
+#helptab-icon-event {
+    background: transparent url("images/event.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+
+#helptab-icon-membership {
+    background: transparent url("images/membership.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+#helptab-icon-participant {
+    background: transparent url("images/participant.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+
+#helptab-icon-relationship {
+    background: transparent url("images/relationship.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+
+#helptab-icon-report {
+    background: transparent url("images/report.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+
+#helptab-icon-setting {
+    background: transparent url("images/setting.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+
+#helptab-icon-activity {
+    background: transparent url("images/activity.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+
+#helptab-icon-pledge {
+    background: transparent url("images/pledge.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+#helptab-icon-admin {
+    background: transparent url("images/admin.png") no-repeat scroll 0 0;
+    height: 25px;
+    width: 25px;
+}
+
+

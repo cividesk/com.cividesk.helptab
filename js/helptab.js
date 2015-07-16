@@ -1,6 +1,6 @@
 cj(document).ready(function() {
 
-  cj('body').append('<div id="helptab-panel"><div id="helptab-map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="helptab-accordion" style="text-align: left;" class="helptab-container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="helptab-map-legend-control" title="Looking for help ?" class="left"><span class="helptab-pointer"><span id="helptab-count" style="display: none;"></span></span><div href="javascript:void()" id="helptab-toggle-slide-button"></div></div></div>');
+  cj('body').append('<div id="helptab-panel"><div id="helptab-map-legend"><div class="jScrollbar4"><div class="jScrollbar_mask"><div id="helptab-accordion_OLD" style="text-align: left;" class="helptab-container"></div></div><div class="jScrollbar_draggable"><a href="#" class="draggable"></a></div></div></div><div id="helptab-map-legend-control" title="Looking for help ?" class="left"><span class="helptab-pointer"><span id="helptab-count" style="display: none;"></span></span><div href="javascript:void()" id="helptab-toggle-slide-button"></div></div></div>');
   var state = false;
   cj("body").on('click', '#helptab-map-legend-control, span#helptab-count', function(event) {
     event.stopImmediatePropagation();
@@ -50,7 +50,14 @@ function getContent() {
       cj.each(response.result, function(i, obj) {
         //@todo - temporary url for tracking of logging info, which will something like - 'http://api.cividesk.com/redirect.php?itemId=XXX';
         var redirectUrl = helpTabUrl + '?action=redirect&itemId=' + obj.item_id  ;
-        var viewData = '<h3><a target="_blank" class="helptab-title" style="font-weight: normal;font-size: 1em;" href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="helptab-context">' + obj.text + '</div>';
+          //var viewData = '<h3><a target="_blank" class="helptab-title" style="font-weight: normal;font-size: 1em;" href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="helptab-context">' + obj.text + '</div>';
+
+          if(obj.source.length > 0){
+              var source   = obj.source.toLowerCase();
+              var helptab_iconId = "helptab-icon-"+source;
+          }
+       
+          var viewData = '<h3 class="help-tab-title-h3"><span class="helptab_iconClass" id="'+ helptab_iconId +'" title="'+ obj.text +'"></span><a target="_blank" class="helptab-title" style="font-weight: normal;font-size: 1em;" href="' + redirectUrl + '">' + obj.title + '</a></h3>';
         container.append(viewData)
       });
       if (response.result.length == 0 ) {

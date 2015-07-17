@@ -155,7 +155,8 @@ span#helptab-count {
     color: #555555;
     font-family:Georgia,"Times New Roman",Times,serif;
     font-weight: normal;
-    margin-left: 30px;
+    margin-left: 26px;
+    display : block; 	
 }
 
 .helptab_iconClass {

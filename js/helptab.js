@@ -83,7 +83,7 @@ function getContent() {
       //Handle click event for head tag in accordion
       cj(".helptab-title").on("click", function(e) {
 
-          e.stopImmediatePropagation();
+          e.preventDefault();
         //keep track of logging            
         //setLogs(cj(this).attr('url'), cj(this).attr('href'), civicrm_contex);
         window.open(cj(this).attr('href') +'&cividesk_key='+cividesk_key +'&context='+civicrm_contex , '_blank');

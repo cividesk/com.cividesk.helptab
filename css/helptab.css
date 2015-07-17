@@ -76,7 +76,7 @@
 
 .jScrollbar4 .jScrollbar_mask {
   margin-right: 2px;
-  width: 470px !important;
+  width: 458px !important;
 }
 
 .jScrollbar4 .jScrollbar_draggable a.draggable{
@@ -156,7 +156,8 @@ span#helptab-count {
     font-family:Georgia,"Times New Roman",Times,serif;
     font-weight: normal;
     margin-left: 26px;
-    display : block; 	
+    display : block; 
+    font-size : 13px !important;	
 }
 
 .helptab_iconClass {

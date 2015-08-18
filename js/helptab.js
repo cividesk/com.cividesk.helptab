@@ -36,7 +36,7 @@ function getContent() {
   cj.ajax(getcontent, {
     type: 'post',
     dataType: 'json',
-    data: {cividesk_key : cividesk_key, civicrm_version : civicrm_version, context: civicrm_contex },
+    data: {sid : cividesk_key, ver : civicrm_version, context: civicrm_contex },
     error: function() {
       alert('Could not retrieve data from HelpTab');
     },
@@ -86,7 +86,7 @@ function getContent() {
           e.preventDefault();
         //keep track of logging            
         //setLogs(cj(this).attr('url'), cj(this).attr('href'), civicrm_contex);
-        window.open(cj(this).attr('href') +'&cividesk_key='+cividesk_key +'&context='+civicrm_contex , '_blank');
+        window.open(cj(this).attr('href') +'&sid='+cividesk_key +'&context='+civicrm_contex +'&ver='+ civicrm_version , '_blank');
       });
     }
   });

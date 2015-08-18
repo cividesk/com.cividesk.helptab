@@ -27,6 +27,7 @@ function helptab_civicrm_xmlMenu(&$files) {
  *
  * @param $files array(string)
  */
+/*
 function helptab_civicrm_navigationMenu( &$params ) {
   // Add menu entry for extension administration page
   _helptab_civix_insert_navigation_menu($params, 'Administer/Customize Data and Screens', array(
@@ -35,7 +36,7 @@ function helptab_civicrm_navigationMenu( &$params ) {
     'permission' => 'administer CiviCRM',
   ));
 }
-
+*/
 /**
  * Implementation of hook_civicrm_install
  */

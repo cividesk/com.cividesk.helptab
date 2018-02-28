@@ -51,8 +51,8 @@ function getContent() {
         //@todo - temporary url for tracking of logging info, which will something like - 'http://api.cividesk.com/redirect.php?itemId=XXX';
         var redirectUrl = helpTabUrl + '?action=redirect&itemId=' + obj.item_id  ;
           //var viewData = '<h3><a target="_blank" class="helptab-title" style="font-weight: normal;font-size: 1em;" href="' + redirectUrl + '">' + obj.title + '</a></h3><div class="helptab-context">' + obj.text + '</div>';
-
-          if(obj.source.length > 0){
+          var helptab_iconId = '';
+          if(obj.source !== null && obj.source.length > 0){
               var source   = obj.source.toLowerCase();
               var helptab_iconId = "helptab-icon-"+source;
           }

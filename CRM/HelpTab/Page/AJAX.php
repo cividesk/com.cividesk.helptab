@@ -26,10 +26,8 @@ class CRM_HelpTab_Page_AJAX {
       }
       if ($curl_response === false) {
         $info = curl_getinfo($curl);
-        curl_close($curl);
         throw new Exception('error occurred during curl exec. Additional info: ' . print_r($info, TRUE) );
       }
-      curl_close($curl);
     } catch( Exception $e ) {
       //
     }

@@ -32,16 +32,16 @@ class CRM_HelpTab_Page_AJAX {
       //
     }
     */
-    $records = array();
-    $records[] = array('url' => 'https://google.com', 'item_id' => '1', 'title' => 'Google', 'text' => 'Google Gmail');
-    $records[] = array('url' => 'https://yahoo.com', 'item_id' => '2', 'title' => 'Yahoo', 'text' => 'Yahoo Seach and mail');
-    $records[] = array('url' => 'https://microsoft.com', 'item_id' => '3', 'title' => 'Microsoft', 'text' => 'Microsoft OS');
-    $records[] = array('url' => 'https://cividesk.com', 'item_id' => '4', 'title' => 'CiviDesk', 'text' => 'CiviDesk CRM');
-    $records[] = array('url' => 'https://wikipedia.com', 'item_id' => '1', 'title' => 'Wikipedia', 'text' => 'Wikipedia');
-    $records[] = array('url' => 'https://gmail.com', 'item_id' => '2', 'title' => 'Gmail', 'text' => 'search email');
-    $records[] = array('url' => 'https://skype.com', 'item_id' => '3', 'title' => 'Skype', 'text' => 'Video Call');
-    $records[] = array('url' => 'https://join.me', 'item_id' => '4', 'title' => 'Join Me', 'text' => 'screen sharing');
-    $output = array( 'result' => $records, 'total' => count($records));
+    $records = [];
+    $records[] = ['url' => 'https://google.com', 'item_id' => '1', 'title' => 'Google', 'text' => 'Google Gmail'];
+    $records[] = ['url' => 'https://yahoo.com', 'item_id' => '2', 'title' => 'Yahoo', 'text' => 'Yahoo Seach and mail'];
+    $records[] = ['url' => 'https://microsoft.com', 'item_id' => '3', 'title' => 'Microsoft', 'text' => 'Microsoft OS'];
+    $records[] = ['url' => 'https://cividesk.com', 'item_id' => '4', 'title' => 'CiviDesk', 'text' => 'CiviDesk CRM'];
+    $records[] = ['url' => 'https://wikipedia.com', 'item_id' => '1', 'title' => 'Wikipedia', 'text' => 'Wikipedia'];
+    $records[] = ['url' => 'https://gmail.com', 'item_id' => '2', 'title' => 'Gmail', 'text' => 'search email'];
+    $records[] = ['url' => 'https://skype.com', 'item_id' => '3', 'title' => 'Skype', 'text' => 'Video Call'];
+    $records[] = ['url' => 'https://join.me', 'item_id' => '4', 'title' => 'Join Me', 'text' => 'screen sharing'];
+    $output = [ 'result' => $records, 'total' => count($records)];
 
     echo json_encode($output);
     CRM_Utils_System::civiExit();

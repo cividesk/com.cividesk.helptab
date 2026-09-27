@@ -24,7 +24,7 @@ class CRM_Admin_Form_Setting_HelpTab extends CRM_Admin_Form_Setting {
   function preProcess() {
     // Needs to be here as from is build before default values are set
     $this->_settings = CRM_Utils_HelpTab::getSettings();
-    if (!$this->_settings) $this->_settings = array();
+    if (!$this->_settings) $this->_settings = [];
   }
 
   /**
@@ -38,20 +38,20 @@ class CRM_Admin_Form_Setting_HelpTab extends CRM_Admin_Form_Setting {
 
     $this->add('text', "cividesk_key", ts("Cividesk key"), '', true);
   
-    $this->addFormRule(array('CRM_Admin_Form_Setting_HelpTab', 'formRule'));
+    $this->addFormRule(['CRM_Admin_Form_Setting_HelpTab', 'formRule']);
     
     
-    $this->addButtons(array(
-      array(
+    $this->addButtons([
+      [
         'type' => 'submit',
         'name' => ts('Save'),
         'isDefault' => TRUE,
-      ),
-      array(
+      ],
+      [
         'type' => 'cancel',
         'name' => ts('Cancel'),
-      ),
-    ));
+      ],
+    ]);
   }
 
   function setDefaultValues() {
@@ -60,7 +60,7 @@ class CRM_Admin_Form_Setting_HelpTab extends CRM_Admin_Form_Setting {
   }
 
   static function formRule($fields) {
-    $errors = array();
+    $errors = [];
     return empty($errors) ? TRUE : $errors;
   }
 
@@ -76,7 +76,7 @@ class CRM_Admin_Form_Setting_HelpTab extends CRM_Admin_Form_Setting {
     // Save all settings
     foreach ($this->_elementIndex as $key => $dontcare) {
       $prefix = reset(explode('_', $key));
-      if (in_array($prefix, array('cividesk') ) ) {
+      if (in_array($prefix, ['cividesk'] ) ) {
         CRM_Utils_HelpTab::setSetting(CRM_Utils_Array::value($key, $params, 0), $key);
       }
     }
